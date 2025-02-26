@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Library from '../library'
 import Feed from '../feed'
@@ -8,19 +8,27 @@ import Favorites from '../favorites'
 import Sidebar from '../../components/sidebar'
 import '../../components/sidebar/sidebar.css'
 import './home.css'
+import Login from '../auth/login'
 
 export default function Home() {
+  const [token, setToken] = useState("");
+
+  useEffect(() => {
+    const hash = window.location.hash
+    
+  }, [])
   return (
     <Router>
       <div className="main-body" >
-        <Sidebar />
+        <Login />
+        {/* <Sidebar />
         <Routes>
             <Route path="/" element={<Library />} />
             <Route path="/feed" element={<Feed />} />
             <Route path="/trending" element={<Trending />} />
             <Route path="/player" element={<Player />} />
             <Route path="/favorites" element={<Favorites />} />
-        </Routes>
+        </Routes> */}
       </div>
     </Router>
   )
