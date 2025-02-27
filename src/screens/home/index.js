@@ -14,21 +14,30 @@ export default function Home() {
   const [token, setToken] = useState("");
 
   useEffect(() => {
-    const hash = window.location.hash
-    
+    const token = window.localStorage.getItem("token");
+    const hash = window.location.hash;
+    window.location.hash = "";
+    if (!token && hash) {
+      const _token = hash.split("&")[0].split("=")[1];
+      window.localStorage.setItem("token", _token);
+      setToken(_token);
+    } else {
+      setToken(token);
+    }
   }, [])
-  return (
+  return !token ? (
+    <Login />
+  ) : (
     <Router>
       <div className="main-body">
-        <Login />
-        {/* <Sidebar />
+        <Sidebar />
         <Routes>
             <Route path="/" element={<Library />} />
             <Route path="/feed" element={<Feed />} />
             <Route path="/trending" element={<Trending />} />
             <Route path="/player" element={<Player />} />
             <Route path="/favorites" element={<Favorites />} />
-        </Routes> */}
+        </Routes>
       </div>
     </Router>
   )
