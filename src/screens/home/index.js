@@ -19,7 +19,7 @@ export default function Home() {
   }, [])
   return (
     <Router>
-      <div className="main-body" >
+      <div className="main-body">
         <Login />
         {/* <Sidebar />
         <Routes>
