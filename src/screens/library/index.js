@@ -1,5 +1,18 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import APIkit from "../../spotify"
 
 export default function Library() {
-  return <div className='screen-container'>L</div>
+  const [playlists, setPlaylists] = useState(null);
+
+  useEffect(() => {
+    APIkit.get("me/playlists").them(function (response) {
+      setPlaylists(response.data.items);
+      console.log(response.data.items);
+    });
+  }, []);
+  return <div className='screen-container'>
+    {playlists?.map((playlist) => (
+      <div>{playlist.name}</div>
+    ))}
+  </div>
 }
